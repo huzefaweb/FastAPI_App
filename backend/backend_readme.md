@@ -23,13 +23,13 @@ It uses MongoDB (Motor), Docker & Docker Compose for containerization, and pytes
    ```
 2. Edit `.env` and fill in:
    ```dotenv
-   MONGODB_URI=mongodb://mongo:27017
-   DB_NAME=auth_db
+   MONGODB_URI=mongodb://mongo:port_number
+   DB_NAME=database_name
 
    SECRET_KEY=your_secret_key_here
-   ALGORITHM=HS256
-   ACCESS_TOKEN_EXPIRE_MINUTES=30
-   REFRESH_TOKEN_EXPIRE_MINUTES=10080   # 7 days
+   ALGORITHM=Algo_key
+   ACCESS_TOKEN_EXPIRE_MINUTES=Numbers
+   REFRESH_TOKEN_EXPIRE_MINUTES=Numbers   # 7 days
    ```
 
 ---
@@ -102,13 +102,6 @@ All tests should pass green.
 ---
 
 ## API Endpoints
-
-### Root
-
-- `GET /`
-  ```json
-  { "message": "Auth App v1 is up and running" }
-  ```
 
 ### Authentication (`/auth`)
 
@@ -185,5 +178,5 @@ All tests should pass green.
 
 ## License
 
-MIT © Huzefa AhmedS
+MIT © Huzefa Ahmed
 
