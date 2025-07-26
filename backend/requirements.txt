@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+motor
+pydantic
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt==4.0.1
+pytest
+httpx
+pydantic[email]
+pydantic-settings
+pytest
+httpx
+pytest-asyncio
+fastapi[all]
+asgi-lifespan

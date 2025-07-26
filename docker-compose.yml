@@ -1,0 +1,51 @@
+#version: "3.9"
+
+services:
+  mongo:
+    image: mongo:6.0
+    restart: always
+    # No host port mapping needed for internal services
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env        # <-- make sure this file contains: MONGODB_URI=mongodb://mongo:27017
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  tests:
+    build:
+      context: ./backend        # reuse your backend Dockerfile & image
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env          # load the same variables (incl. MONGODB_URI)
+    volumes:
+      - ./backend:/app          # mount your code + tests into /app
+    depends_on:
+      - backend                 # waits for healthcheck before starting
+    command: pytest --disable-warnings -q
+    # no ports, no extra env overrides
+
+volumes:
+  mongo_data:
