@@ -46,36 +46,17 @@ cd <your-repo-folder>
 - **backend/**: Copy `backend/.env.example` to `backend/.env` and fill in the values (e.g., `MONGODB_URI`, `JWT_SECRET`, etc.).
 - **frontend/**: Copy `frontend/.env.example` to `frontend/.env` and configure the API base URL (e.g., `VITE_API_BASE_URL=http://localhost:8000`).
 
-### 3. Bring up backend & database
+### 3. Run the App
 
 From the root of this repo:
 
 ```bash
-# Builds and starts the FastAPI app and MongoDB
-cd backend
-docker-compose up --build -d
+docker-compose up --build
 ```
 
 - Backend API will be available at `http://localhost:8000`
 - MongoDB is running in a Docker container on the default port (27017)
-
-### 4. Run backend tests (optional)
-
-```bash
-cd backend
-pytest
-```
-
-### 5. Start the frontend
-
-In a separate terminal:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
+- backend pytests will also run with docker if you don't want it comment it out in the docker_compose.yml
 - Frontend app will be available at `http://localhost:3000` (or another port as displayed).
 
 ### 6. Test the End-to-End Flow
